@@ -1,5 +1,14 @@
 public class LautstaerkeModel {
     private double lautstaerke;
+    private Observer view;
+
+    public LautstaerkeModel() {
+        this.lautstaerke = 3.0;
+    }
+
+    public void setView(Observer view) {
+        this.view = view;
+    }
 
     public double getLautstaerke() {
         return lautstaerke;
@@ -13,5 +22,8 @@ public class LautstaerkeModel {
             lautstaerke = 0.0;
         }
         this.lautstaerke = lautstaerke;
+
+        // Observer benachrichtigen
+        view.update();
     }
 }

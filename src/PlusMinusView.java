@@ -1,12 +1,20 @@
 import javax.swing.*;
 import java.awt.*;
 
-public class PlusMinusView extends JFrame {
+public class PlusMinusView extends JFrame implements Observer {
+    // GUI
     private JButton buttonMinus;
     private JButton buttonPlus;
     private JLabel labelLautstaerke;
 
-    public PlusMinusView() {
+    // MVC
+    private LautstaerkeModel model;
+
+    public PlusMinusView(LautstaerkeModel model) {
+        // MVC
+        this.model = model;
+        model.setView(this);
+
         // komplettes Fenster
         setTitle("Lautstärke");
         setSize(300, 100);
@@ -27,5 +35,11 @@ public class PlusMinusView extends JFrame {
 
         getContentPane().add(panelGesamt);
         setVisible(true);
+    }
+
+    @Override
+    public void update() {
+        double lautstaerke = model.getLautstaerke();
+        labelLautstaerke.setText(String. format("%.1f", lautstaerke));
     }
 }
