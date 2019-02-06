@@ -1,9 +1,12 @@
 package view;
 
+import controller.PlusMinusController;
 import model.LautstaerkeModel;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class PlusMinusView extends JFrame implements Observer {
     // GUI
@@ -13,11 +16,13 @@ public class PlusMinusView extends JFrame implements Observer {
 
     // MVC
     private LautstaerkeModel model;
+    private PlusMinusController controller;
 
     public PlusMinusView(LautstaerkeModel model) {
         // MVC
         this.model = model;
         model.setView(this);
+        controller = new PlusMinusController(model);
 
         // komplettes Fenster
         setTitle("Lautstärke");
@@ -38,6 +43,22 @@ public class PlusMinusView extends JFrame implements Observer {
         panelGesamt.add(buttonPlus, BorderLayout.EAST);
 
         getContentPane().add(panelGesamt);
+
+        // Eventhandler
+        buttonMinus.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                controller.minusEvent();
+            }
+        });
+
+        buttonPlus.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                controller.plusEvent();
+            }
+        });
+
         setVisible(true);
     }
 
