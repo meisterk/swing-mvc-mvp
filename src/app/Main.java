@@ -11,7 +11,9 @@ public class Main {
 
         // Views
         new PlusMinusView(model);
-        //new SliderView(model);
+        new SliderView(model);
+
+        // TODO SliderController
 
         model.setLautstaerke(7.5);
         model.setLautstaerke(3.5);
