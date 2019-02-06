@@ -16,7 +16,7 @@ public class SliderView extends JFrame implements Observer {
     public SliderView(LautstaerkeModel model) {
         // MVC
         this.model = model;
-        model.setView(this);
+        model.setObserver(this);
 
         // komplettes Fenster
         setTitle("Lautstärke Slider");

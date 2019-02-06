@@ -10,16 +10,16 @@ public class LautstaerkeModel {
     private double lautstaerke;
 
     // für MVC
-    private List<Observer> views;
+    private List<Observer> observers;
 
     public LautstaerkeModel() {
-        this.views = new ArrayList<>();
+        this.observers = new ArrayList<>();
         this.lautstaerke = 3.0;
     }
 
     // für MVC
-    public void setView(Observer view) {
-        this.views.add(view);
+    public void setObserver(Observer view) {
+        this.observers.add(view);
     }
 
     public double getLautstaerke() {
@@ -27,17 +27,19 @@ public class LautstaerkeModel {
     }
 
     public void setLautstaerke(double lautstaerke) {
-        if(lautstaerke > 10.0){
-            lautstaerke = 10.0;
-        }
-        if(lautstaerke < 0.0){
-            lautstaerke = 0.0;
-        }
-        this.lautstaerke = lautstaerke;
+        if (lautstaerke != this.lautstaerke) {
+            if (lautstaerke > 10.0) {
+                lautstaerke = 10.0;
+            }
+            if (lautstaerke < 0.0) {
+                lautstaerke = 0.0;
+            }
+            this.lautstaerke = lautstaerke;
 
-        // view.Observer benachrichtigen
-        for (Observer view : views) {
-            view.update();
+            // view.Observer benachrichtigen
+            for (Observer observer : observers) {
+                observer.update();
+            }
         }
     }
 }

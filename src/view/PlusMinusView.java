@@ -21,8 +21,8 @@ public class PlusMinusView extends JFrame implements Observer {
     public PlusMinusView(LautstaerkeModel model) {
         // MVC
         this.model = model;
-        model.setView(this);
-        controller = new PlusMinusController(model);
+        model.setObserver(this);
+        controller = new PlusMinusController(model, this);
 
         // komplettes Fenster
         setTitle("Lautstärke");
@@ -65,6 +65,22 @@ public class PlusMinusView extends JFrame implements Observer {
     @Override
     public void update() {
         double lautstaerke = model.getLautstaerke();
-        labelLautstaerke.setText(String. format("%.1f", lautstaerke));
+        labelLautstaerke.setText(String.format("%.1f", lautstaerke));
+    }
+
+    public void minusButtonAktivieren() {
+        buttonMinus.setEnabled(true);
+    }
+
+    public void minusButtonDeaktivieren() {
+        buttonMinus.setEnabled(false);
+    }
+
+    public void plusButtonAktivieren() {
+        buttonPlus.setEnabled(true);
+    }
+
+    public void plusButtonDeaktivieren() {
+        buttonPlus.setEnabled(false);
     }
 }
