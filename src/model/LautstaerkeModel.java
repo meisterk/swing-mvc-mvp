@@ -1,13 +1,25 @@
+package model;
+
+import view.Observer;
+
+import java.util.ArrayList;
+import java.util.List;
+
 public class LautstaerkeModel {
+    // Daten
     private double lautstaerke;
-    private Observer view;
+
+    // für MVC
+    private List<Observer> views;
 
     public LautstaerkeModel() {
+        this.views = new ArrayList<>();
         this.lautstaerke = 3.0;
     }
 
+    // für MVC
     public void setView(Observer view) {
-        this.view = view;
+        this.views.add(view);
     }
 
     public double getLautstaerke() {
@@ -23,7 +35,9 @@ public class LautstaerkeModel {
         }
         this.lautstaerke = lautstaerke;
 
-        // Observer benachrichtigen
-        view.update();
+        // view.Observer benachrichtigen
+        for (Observer view : views) {
+            view.update();
+        }
     }
 }

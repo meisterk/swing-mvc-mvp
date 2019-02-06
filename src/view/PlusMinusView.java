@@ -1,3 +1,7 @@
+package view;
+
+import model.LautstaerkeModel;
+
 import javax.swing.*;
 import java.awt.*;
 
