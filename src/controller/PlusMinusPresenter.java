@@ -4,17 +4,25 @@ import model.LautstaerkeModel;
 import view.Observer;
 import view.PlusMinusView;
 
-public class PlusMinusController implements Observer {
-    // MVC
+public class PlusMinusPresenter implements Observer {
+    // MVP
     private LautstaerkeModel model;
     private PlusMinusView view;
 
-    public PlusMinusController(LautstaerkeModel model, PlusMinusView view) {
-        this.model = model;
-        this.view = view;
-        this.model.setObserver(this);
+    public PlusMinusPresenter() {
+
     }
 
+    // MVP
+    public void setView(PlusMinusView view) {
+        this.view = view;
+    }
+
+    public void setModel(LautstaerkeModel model) {
+        this.model = model;
+    }
+
+    // Events
     public void minusEvent() {
         double alteLautstaerke = model.getLautstaerke();
         double neueLautstaerke = alteLautstaerke - 0.5;
@@ -27,9 +35,14 @@ public class PlusMinusController implements Observer {
         model.setLautstaerke(neueLautstaerke);
     }
 
+    // Observer
     @Override
     public void update() {
         double neueLautstaerke = model.getLautstaerke();
+        // View aktualisieren
+        view.setLautstaerke(String.format("%.1f \uD83D\uDD0A", neueLautstaerke));
+
+        // Buttons (de)aktivieren
         if(neueLautstaerke <= 0.0){
             view.minusButtonDeaktivieren();
             view.plusButtonAktivieren();

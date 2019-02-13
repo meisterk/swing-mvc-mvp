@@ -3,11 +3,11 @@ package controller;
 import model.LautstaerkeModel;
 import view.SliderView;
 
-public class SliderController {
+public class SliderPresenter {
     private LautstaerkeModel model;
     private SliderView view;
 
-    public SliderController(LautstaerkeModel model, SliderView view) {
+    public SliderPresenter(LautstaerkeModel model, SliderView view) {
         this.model = model;
         this.view = view;
     }

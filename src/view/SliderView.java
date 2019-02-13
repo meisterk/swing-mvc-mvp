@@ -1,28 +1,21 @@
 package view;
 
-import controller.SliderController;
-import model.LautstaerkeModel;
+import controller.SliderPresenter;
 
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import java.awt.*;
 
-public class SliderView extends JFrame implements Observer {
+public class SliderView extends JFrame{
     // GUI
     private JSlider sliderLautstaerke;
     private JLabel labelLautstaerke;
 
-    // MVC
-    private LautstaerkeModel model;
-    private SliderController controller;
+    // MVP
+    private SliderPresenter presenter;
 
-    public SliderView(LautstaerkeModel model) {
-        // MVC
-        this.model = model;
-        model.setObserver(this);
-        controller = new SliderController(model, this);
-
+    public SliderView() {
         // komplettes Fenster
         setTitle("Lautstärke Slider");
         setSize(300, 100);
@@ -52,7 +45,7 @@ public class SliderView extends JFrame implements Observer {
         sliderLautstaerke.addChangeListener(new ChangeListener() {
             @Override
             public void stateChanged(ChangeEvent e) {
-                controller.changeEvent();
+                presenter.changeEvent();
             }
         });
 
@@ -60,14 +53,20 @@ public class SliderView extends JFrame implements Observer {
         setVisible(true);
     }
 
-    @Override
-    public void update() {
-        double lautstaerke = model.getLautstaerke();
-        labelLautstaerke.setText(String. format("%.1f", lautstaerke));
-        sliderLautstaerke.setValue((int)(lautstaerke * 2.0));
+    public void setPresenter(SliderPresenter presenter){
+        this.presenter = presenter;
     }
+
 
     public int getSliderWert(){
         return sliderLautstaerke.getValue();
+    }
+
+    public void setSliderWert(int sliderWert){
+        sliderLautstaerke.setValue(sliderWert);
+    }
+
+    public void setLautstaerkeText(String lautstaerke){
+        labelLautstaerke.setText(lautstaerke);
     }
 }

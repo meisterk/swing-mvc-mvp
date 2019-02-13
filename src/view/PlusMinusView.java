@@ -1,28 +1,21 @@
 package view;
 
-import controller.PlusMinusController;
-import model.LautstaerkeModel;
-
+import controller.PlusMinusPresenter;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class PlusMinusView extends JFrame implements Observer {
+public class PlusMinusView extends JFrame {
     // GUI
     private JButton buttonMinus;
     private JButton buttonPlus;
     private JLabel labelLautstaerke;
 
-    // MVC
-    private LautstaerkeModel model;
-    private PlusMinusController controller;
+    // MVP
+    private PlusMinusPresenter presenter;
 
-    public PlusMinusView(LautstaerkeModel model) {
-        // MVC
-        this.model = model;
-        model.setObserver(this);
-        controller = new PlusMinusController(model, this);
+    public PlusMinusView() {
 
         // komplettes Fenster
         setTitle("Lautstärke");
@@ -48,24 +41,28 @@ public class PlusMinusView extends JFrame implements Observer {
         buttonMinus.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                controller.minusEvent();
+                presenter.minusEvent();
             }
         });
 
         buttonPlus.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                controller.plusEvent();
+                presenter.plusEvent();
             }
         });
 
         setVisible(true);
     }
 
-    @Override
-    public void update() {
-        double lautstaerke = model.getLautstaerke();
-        labelLautstaerke.setText(String.format("%.1f", lautstaerke));
+    // MVP
+    public void setPresenter(PlusMinusPresenter presenter) {
+        this.presenter = presenter;
+    }
+
+    // Darstellung ändern durch Presenter
+    public void setLautstaerke(String lautstaerke){
+        labelLautstaerke.setText(lautstaerke);
     }
 
     public void minusButtonAktivieren() {
@@ -83,4 +80,6 @@ public class PlusMinusView extends JFrame implements Observer {
     public void plusButtonDeaktivieren() {
         buttonPlus.setEnabled(false);
     }
+
+
 }
