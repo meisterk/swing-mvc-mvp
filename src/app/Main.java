@@ -1,31 +1,34 @@
 package app;
 
-import controller.PlusMinusPresenter;
-import controller.SliderPresenter;
+import presenter.IPlusMinusPresenter;
+import presenter.PlusMinusPresenter;
+import presenter.ISliderPresenter;
+import presenter.SliderPresenter;
+import model.IModel;
 import model.LautstaerkeModel;
 import view.PlusMinusView;
+import view.IPlusMinusView;
+import view.ISliderView;
 import view.SliderView;
 
 public class Main {
     public static void main(String[] args) {
         // Instanzen
-        LautstaerkeModel model = new LautstaerkeModel();
+        IModel model = new LautstaerkeModel();
 
-        PlusMinusPresenter presenter1 = new PlusMinusPresenter();
-        PlusMinusView view1 = new PlusMinusView();
+        IPlusMinusPresenter presenter1 = new PlusMinusPresenter();
+        IPlusMinusView view1 = new PlusMinusView();
 
-        SliderPresenter presenter2 = new SliderPresenter();
-        SliderView view2 = new SliderView();
+        ISliderPresenter presenter2 = new SliderPresenter();
+        ISliderView view2 = new SliderView();
 
         // Verdrahten
         presenter1.setView(view1);
         presenter1.setModel(model);
-        model.setObserver(presenter1);
         view1.setPresenter(presenter1);
 
         presenter2.setView(view2);
         presenter2.setModel(model);
-        model.setObserver(presenter2);
         view2.setPresenter(presenter2);
 
         // Anfangswert

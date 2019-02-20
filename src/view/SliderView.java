@@ -1,19 +1,19 @@
 package view;
 
-import controller.SliderPresenter;
+import presenter.ISliderPresenter;
 
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import java.awt.*;
 
-public class SliderView extends JFrame{
+public class SliderView extends JFrame implements ISliderView {
     // GUI
     private JSlider sliderLautstaerke;
     private JLabel labelLautstaerke;
 
     // MVP
-    private SliderPresenter presenter;
+    private ISliderPresenter presenter;
 
     public SliderView() {
         // komplettes Fenster
@@ -53,20 +53,22 @@ public class SliderView extends JFrame{
         setVisible(true);
     }
 
-    public void setPresenter(SliderPresenter presenter){
+    public void setPresenter(ISliderPresenter presenter) {
         this.presenter = presenter;
     }
 
-
-    public int getSliderWert(){
+    @Override
+    public int getSliderWert() {
         return sliderLautstaerke.getValue();
     }
 
-    public void setSliderWert(int sliderWert){
+    @Override
+    public void setSliderWert(int sliderWert) {
         sliderLautstaerke.setValue(sliderWert);
     }
 
-    public void setLautstaerkeText(String lautstaerke){
+    @Override
+    public void setLautstaerkeText(String lautstaerke) {
         labelLautstaerke.setText(lautstaerke);
     }
 }

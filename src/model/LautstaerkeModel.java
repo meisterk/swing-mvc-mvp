@@ -5,7 +5,7 @@ import view.Observer;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LautstaerkeModel {
+public class LautstaerkeModel implements IModel{
     // Daten
     private double lautstaerke;
 
@@ -22,10 +22,12 @@ public class LautstaerkeModel {
         this.observers.add(view);
     }
 
+    @Override
     public double getLautstaerke() {
         return lautstaerke;
     }
 
+    @Override
     public void setLautstaerke(double lautstaerke) {
         if (lautstaerke != this.lautstaerke) {
             if (lautstaerke > 10.0) {

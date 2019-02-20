@@ -1,19 +1,19 @@
 package view;
 
-import controller.PlusMinusPresenter;
+import presenter.IPlusMinusPresenter;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class PlusMinusView extends JFrame {
+public class PlusMinusView extends JFrame implements IPlusMinusView {
     // GUI
     private JButton buttonMinus;
     private JButton buttonPlus;
     private JLabel labelLautstaerke;
 
     // MVP
-    private PlusMinusPresenter presenter;
+    private IPlusMinusPresenter presenter;
 
     public PlusMinusView() {
 
@@ -56,27 +56,32 @@ public class PlusMinusView extends JFrame {
     }
 
     // MVP
-    public void setPresenter(PlusMinusPresenter presenter) {
+    public void setPresenter(IPlusMinusPresenter presenter) {
         this.presenter = presenter;
     }
 
     // Darstellung ändern durch Presenter
-    public void setLautstaerke(String lautstaerke){
+    @Override
+    public void setLautstaerke(String lautstaerke) {
         labelLautstaerke.setText(lautstaerke);
     }
 
+    @Override
     public void minusButtonAktivieren() {
         buttonMinus.setEnabled(true);
     }
 
+    @Override
     public void minusButtonDeaktivieren() {
         buttonMinus.setEnabled(false);
     }
 
+    @Override
     public void plusButtonAktivieren() {
         buttonPlus.setEnabled(true);
     }
 
+    @Override
     public void plusButtonDeaktivieren() {
         buttonPlus.setEnabled(false);
     }

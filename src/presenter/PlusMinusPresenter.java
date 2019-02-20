@@ -1,21 +1,22 @@
-package controller;
+package presenter;
 
-import model.LautstaerkeModel;
+import model.IModel;
 import view.Observer;
-import view.PlusMinusView;
+import view.IPlusMinusView;
 
-public class PlusMinusPresenter implements Observer {
+public class PlusMinusPresenter implements Observer, IPlusMinusPresenter {
     // MVP
-    private LautstaerkeModel model;
-    private PlusMinusView view;
+    private IModel model;
+    private IPlusMinusView view;
 
     // MVP
-    public void setView(PlusMinusView view) {
+    public void setView(IPlusMinusView view) {
         this.view = view;
     }
 
-    public void setModel(LautstaerkeModel model) {
+    public void setModel(IModel model) {
         this.model = model;
+        this.model.setObserver(this);
     }
 
     // Events
@@ -41,14 +42,14 @@ public class PlusMinusPresenter implements Observer {
         view.setLautstaerke(String.format("%.1f \uD83D\uDD0A", neueLautstaerke));
 
         // Buttons (de)aktivieren
-        if(neueLautstaerke <= 0.0){
+        if (neueLautstaerke <= 0.0) {
             view.minusButtonDeaktivieren();
             view.plusButtonAktivieren();
-        }else{
-            if(neueLautstaerke < 10.0){
+        } else {
+            if (neueLautstaerke < 10.0) {
                 view.minusButtonAktivieren();
                 view.plusButtonAktivieren();
-            }else{
+            } else {
                 view.minusButtonAktivieren();
                 view.plusButtonDeaktivieren();
             }

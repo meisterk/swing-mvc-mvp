@@ -1,24 +1,26 @@
-package controller;
+package presenter;
 
-import model.LautstaerkeModel;
+import model.IModel;
 import view.Observer;
-import view.SliderView;
+import view.ISliderView;
 
-public class SliderPresenter implements Observer {
+public class SliderPresenter implements Observer, ISliderPresenter {
     // MVP
-    private LautstaerkeModel model;
-    private SliderView view;
+    private IModel model;
+    private ISliderView view;
 
     // MVP
-    public void setModel(LautstaerkeModel model) {
+    public void setModel(IModel model) {
         this.model = model;
+        this.model.setObserver(this);
     }
 
-    public void setView(SliderView view) {
+    public void setView(ISliderView view) {
         this.view = view;
     }
 
     // Events
+    @Override
     public void changeEvent() {
         int sliderwert = view.getSliderWert();
         model.setLautstaerke(sliderwert/2.0);
