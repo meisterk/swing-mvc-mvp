@@ -26,7 +26,7 @@ public class Main {
         presenter2.setView(view2);
         presenter2.setModel(model);
         model.setObserver(presenter2);
-        view1.setPresenter(presenter2);
+        view2.setPresenter(presenter2);
 
         model.setLautstaerke(3.5);
     }

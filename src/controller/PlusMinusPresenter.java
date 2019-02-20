@@ -9,10 +9,6 @@ public class PlusMinusPresenter implements Observer {
     private LautstaerkeModel model;
     private PlusMinusView view;
 
-    public PlusMinusPresenter() {
-
-    }
-
     // MVP
     public void setView(PlusMinusView view) {
         this.view = view;
