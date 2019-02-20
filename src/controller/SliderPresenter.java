@@ -26,6 +26,11 @@ public class SliderPresenter implements Observer {
 
     @Override
     public void update() {
+        // Neuen Daten holen
+        double neueLautstaerke = model.getLautstaerke();
 
+        // View aktualisieren
+        view.setSliderWert((int)(neueLautstaerke * 2.0));
+        view.setLautstaerkeText(String.format("%.1f \uD83D\uDD0A", neueLautstaerke));
     }
 }

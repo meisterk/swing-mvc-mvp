@@ -28,6 +28,7 @@ public class Main {
         model.setObserver(presenter2);
         view2.setPresenter(presenter2);
 
+        // Anfangswert
         model.setLautstaerke(3.5);
     }
 }

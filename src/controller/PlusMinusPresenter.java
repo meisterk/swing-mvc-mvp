@@ -34,7 +34,9 @@ public class PlusMinusPresenter implements Observer {
     // Observer
     @Override
     public void update() {
+        // Neue Daten holen
         double neueLautstaerke = model.getLautstaerke();
+
         // View aktualisieren
         view.setLautstaerke(String.format("%.1f \uD83D\uDD0A", neueLautstaerke));
 
